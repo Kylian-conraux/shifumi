@@ -17,19 +17,48 @@
 
         <div class="double">
             <div class="blocMain">
-
+                <img id="gauche" src="#" alt="pigeon">
             </div>
             <div class="blocMain">
-
+                <img id="droite" src="#" alt="loutre">
             </div>
         </div>
     </div>
 
     <div class="texteGagnant">
-            <p>Prêt ?</p>
+        <p>Prêt ?</p>
     </div>
 
 
+    <script>
+        let joueurgauche = document.getElementById("gauche");
+        let joueurDroite = document.getElementById("droite");
+
+        function choisirMain() {
+            let choix = Math.ceil(Math.random() * 3);
+            let image;
+            switch (choix) {
+                case 1:
+                    image = "/res/ciseaux.jpg";
+                    break;
+                case 2:
+                    image = "/res/pierre.jpg";
+                    break;
+                case 3:
+                    image = "/res/feuille.jpg";
+                    break;
+                default:
+                    image = "/res/mf.jpg"
+                    break;
+            }
+            return image;
+        }
+
+        
+
+
+
+    </script>
 </body>
 
 </html>
