@@ -35,7 +35,7 @@
 
         /**
          * - Initialisation des variables 
-         **/ 
+         **/
         const joueurGauche = document.getElementById("gauche");
         const joueurDroite = document.getElementById("droite");
         const fond = document.querySelector(".conteneur");
@@ -52,31 +52,44 @@
         let jDpierre = false;
         let jDfeuille = false;
 
+        function Appshifumi(mainDuJoueur) {
+            let choix = Math.ceil(Math.random() * 3);
+            switch (choix) {
+                case 1:
+                    mainDuJoueur.setAttribute("src", "/res/ciseaux.png")
+                    if (mainDuJoueur.id === "gauche") {
+                        jGciseaux = true;
+                    } else {
+                        jDciseaux = true;
+                    }
+                    break;
+                case 2:
+                    mainDuJoueur.setAttribute("src", "/res/pierre.png")
+                    if (mainDuJoueur.id === "gauche") {
+                        jGpierre = true;
+                    } else {
+                        jDpierre = true;
+                    }
+                    break;
+                case 3:
+                    mainDuJoueur.setAttribute("src", "/res/feuille.png")
+                    if (mainDuJoueur.id === "gauche") {
+                        jGfeuille = true;
+                    } else {
+                        jDfeuille = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         /**
          *  AJout des écouteur sur les images de gauche et de droite
-         **/ 
+         **/
         joueurGauche.addEventListener("click", function () {
             if (!jGAclique) {
-                let choix = Math.ceil(Math.random() * 3);
-                let image;
-                switch (choix) {
-                    case 1:
-                        image = "/res/ciseaux.png";
-                        jGciseaux = true;
-                        break;
-                    case 2:
-                        image = "/res/pierre.png";
-                        jGpierre = true;
-                        break;
-                    case 3:
-                        image = "/res/feuille.png";
-                        jGfeuille = true;
-                        break;
-                    default:
-                        image = "/res/mf.png"
-                        break;
-                }
-                joueurGauche.setAttribute("src", image);
+                Appshifumi(joueurGauche)
                 jGAclique = true;
                 quiGagne();
             }
@@ -84,26 +97,7 @@
 
         joueurDroite.addEventListener("click", function () {
             if (!JDAclique) {
-                let choix = Math.ceil(Math.random() * 3);
-                let image;
-                switch (choix) {
-                    case 1:
-                        image = "/res/ciseaux.png";
-                        jDciseaux = true;
-                        break;
-                    case 2:
-                        image = "/res/pierre.png";
-                        jDpierre = true;
-                        break;
-                    case 3:
-                        image = "/res/feuille.png";
-                        jDfeuille = true;
-                        break;
-                    default:
-                        image = "/res/mf.png"
-                        break;
-                }
-                joueurDroite.setAttribute("src", image);
+                Appshifumi(joueurDroite);
                 joueurDroite.style.transform = "scaleX(-1)";
                 JDAclique = true;
                 quiGagne();
@@ -112,7 +106,7 @@
 
         /**
          * Fonction qui détermine le gagnant :
-         **/ 
+         **/
 
         function quiGagne() {
             if (jGAclique && JDAclique) {
@@ -131,7 +125,6 @@
                         annonce.innerHTML = "C'est le joueur de droite qui gagne !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
                     }
                 }
-
                 //Ajout d'un écouteur sur la balise p 
                 annonce.addEventListener("click", function () {
                     jGAclique = false;
