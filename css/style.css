@@ -1,0 +1,54 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.conteneur{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+
+.titre{
+    width: 100%;
+    color: white;
+    background-color: black;
+    text-align: center;
+}
+
+.double{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.blocMain{
+    display: flex;
+    flex: 1;
+    background-color: grey;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10%;    
+}
+
+.blocMain img{
+    width: 500px;
+    height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.texteGagnant{
+    width: 100%;
+    color: white;
+    background-color: black;
+    font-size: 24px;
+    text-align: center;
+}

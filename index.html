@@ -4,59 +4,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Shifumi</title>
 </head>
 
 <body>
 
     <div class="conteneur">
-
         <div class="titre">
             <h1>SHIFUMI !</h1>
         </div>
 
         <div class="double">
             <div class="blocMain">
-                <img id="gauche" src="#" alt="pigeon">
+                <img id="gauche" src="/res/croix.png" alt="pigeon">
             </div>
             <div class="blocMain">
-                <img id="droite" src="#" alt="loutre">
+                <img id="droite" src="/res/croix.png" alt="loutre">
             </div>
+        </div>
+        <div class="texteGagnant">
+            <p id="annonceur">Prêt ?</p>
         </div>
     </div>
 
-    <div class="texteGagnant">
-        <p>Prêt ?</p>
-    </div>
+
 
 
     <script>
-        let joueurgauche = document.getElementById("gauche");
-        let joueurDroite = document.getElementById("droite");
 
-        function choisirMain() {
-            let choix = Math.ceil(Math.random() * 3);
-            let image;
-            switch (choix) {
-                case 1:
-                    image = "/res/ciseaux.jpg";
-                    break;
-                case 2:
-                    image = "/res/pierre.jpg";
-                    break;
-                case 3:
-                    image = "/res/feuille.jpg";
-                    break;
-                default:
-                    image = "/res/mf.jpg"
-                    break;
+        /**
+         * - Initialisation des variables 
+         **/ 
+        const joueurGauche = document.getElementById("gauche");
+        const joueurDroite = document.getElementById("droite");
+        const fond = document.querySelector(".conteneur");
+        const annonce = document.getElementById("annonceur");
+
+        let jGAclique = false;
+        let JDAclique = false;
+
+        let jGciseaux = false;
+        let jGpierre = false;
+        let jGfeuille = false;
+
+        let jDciseaux = false;
+        let jDpierre = false;
+        let jDfeuille = false;
+
+        /**
+         *  AJout des écouteur sur les images de gauche et de droite
+         **/ 
+        joueurGauche.addEventListener("click", function () {
+            if (!jGAclique) {
+                let choix = Math.ceil(Math.random() * 3);
+                let image;
+                switch (choix) {
+                    case 1:
+                        image = "/res/ciseaux.png";
+                        jGciseaux = true;
+                        break;
+                    case 2:
+                        image = "/res/pierre.png";
+                        jGpierre = true;
+                        break;
+                    case 3:
+                        image = "/res/feuille.png";
+                        jGfeuille = true;
+                        break;
+                    default:
+                        image = "/res/mf.png"
+                        break;
+                }
+                joueurGauche.setAttribute("src", image);
+                jGAclique = true;
+                quiGagne();
             }
-            return image;
+        });
+
+        joueurDroite.addEventListener("click", function () {
+            if (!JDAclique) {
+                let choix = Math.ceil(Math.random() * 3);
+                let image;
+                switch (choix) {
+                    case 1:
+                        image = "/res/ciseaux.png";
+                        jDciseaux = true;
+                        break;
+                    case 2:
+                        image = "/res/pierre.png";
+                        jDpierre = true;
+                        break;
+                    case 3:
+                        image = "/res/feuille.png";
+                        jDfeuille = true;
+                        break;
+                    default:
+                        image = "/res/mf.png"
+                        break;
+                }
+                joueurDroite.setAttribute("src", image);
+                joueurDroite.style.transform = "scaleX(-1)";
+                JDAclique = true;
+                quiGagne();
+            }
+        });
+
+        /**
+         * Fonction qui détermine le gagnant :
+         **/ 
+
+        function quiGagne() {
+            if (jGAclique && JDAclique) {
+                if ((jGciseaux && jDciseaux) || (jGpierre && jDpierre) || (jGfeuille && jDfeuille)) {
+                    //Draw
+                    annonce.innerHTML = "C'est une égalité !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                    fond.style.backgroundColor = "gold";
+                } else {
+                    if ((jGciseaux && jDfeuille) || (jGpierre && jDciseaux) || (jGfeuille && jDpierre)) {
+                        // Gauche gagne 
+                        fond.style.backgroundColor = "blue";
+                        annonce.innerHTML = "C'est le joueur de gauche qui gagne !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                    } else {
+                        // Droite gagne
+                        fond.style.backgroundColor = "red";
+                        annonce.innerHTML = "C'est le joueur de droite qui gagne !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                    }
+                }
+
+                //Ajout d'un écouteur sur la balise p 
+                annonce.addEventListener("click", function () {
+                    jGAclique = false;
+                    JDAclique = false;
+
+                    jGciseaux = false;
+                    jGpierre = false;
+                    jGfeuille = false;
+
+                    jDciseaux = false;
+                    jDpierre = false;
+                    jDfeuille = false;
+                    joueurDroite.setAttribute("src", "/res/croix.png");
+                    joueurGauche.setAttribute("src", "/res/croix.png");
+                    fond.style.backgroundColor = "black";
+                    annonce.innerHTML = "Prêt ?"
+                    console.log("PATATE!!!!")
+                });
+            }
         }
-
-        
-
-
 
     </script>
 </body>
