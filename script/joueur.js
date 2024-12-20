@@ -61,7 +61,7 @@ class Joueur {
 
             if (j1.shi === j2.shi) {
                 // Égalité
-                annonce.innerHTML = "C'est une égalité !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                annonce.innerHTML = "C'est une égalité !<br> Voulez-vous recommencer ?<br>(cliquez-moi !)";
                 fond.style.backgroundColor = "gold";
             } else {
                 if (
@@ -71,11 +71,11 @@ class Joueur {
                 ) {
                     // Gauche gagne
                     fond.style.backgroundColor = "blue";
-                    annonce.innerHTML = "C'est le joueur de gauche qui gagne !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                    annonce.innerHTML = "C'est le joueur de gauche qui gagne !<br> Voulez-vous recommencer ?<br>(cliquez-moi !)";
                 } else {
                     // Droite gagne
                     fond.style.backgroundColor = "red";
-                    annonce.innerHTML = "C'est le joueur de droite qui gagne !<br> Voulez-vous recommencer ?<br>(cliquer-moi !)";
+                    annonce.innerHTML = "C'est le joueur de droite qui gagne !<br> Voulez-vous recommencer ?<br>(cliquez-moi !)";
                 }
             }
         }
